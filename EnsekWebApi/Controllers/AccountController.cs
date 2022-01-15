@@ -25,15 +25,5 @@ namespace EnsekWebApi.Controllers
             var accounts = _accountService.GetAllAccounts();
             return View(accounts);
         }
-
-        [System.Web.Http.Route("meter-reading-uploads")]
-        [System.Web.Http.HttpPost]
-        public ActionResult UploadMeterReadings()
-        {
-            var test = _meterService.UploadMeterReadings(@"C:\Users\Nahmaan\source\repos\EnsekWebApi\EnsekWebApi\Meter_Reading.csv");
-            return Index();
-        }
-
-
     }
 }

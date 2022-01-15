@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using EnsekDataAccess.Interfaces;
 using EnsekDataAccess.Models;
 
 namespace EnsekDataAccess.Repository
 {
-    public class MeterRepository
+    public class MeterRepository : IMeterRespository
     {
         private readonly EnsekEntities _ensekEntities;
 
@@ -60,7 +61,8 @@ namespace EnsekDataAccess.Repository
                         MeterReadValue = Convert.ToInt32(row?[2])
                     };
 
-                    if (meterReadings.Contains(meterReading))
+                    var duplicate = meterReadings.Where(x => x.Account == meterReading.Account && x.MeterReadingDateTime == meterReading.MeterReadingDateTime && x.MeterReadValue == meterReading.MeterReadValue);
+                    if (duplicate.Any())
                     {
                         failures++;
                         continue;
@@ -71,6 +73,9 @@ namespace EnsekDataAccess.Repository
                     _ensekEntities.SaveChanges();
                 }
             }
+
+            if (successful == 0)
+                return "No meter readings added due to duplicate or invalid data";
 
             return $@"Successful meter readings: {successful}. Failed meter readings: {failures}";
         }

@@ -3,16 +3,23 @@
     ViewData["Title"] = "Accounts";
 }
 
-<h1>These are all the accounts</h1>
-<a @Html.ActionLink("Upload Meter Readings", "Index", "Meter", new { area = "" }, null)</a>
+<h1>These are all the accounts meter readings</h1>
+
 <table class="table">
     <tr><th scope="col">ID</th><th scope="col">Account Id</th><th></th></tr>
     @foreach (var account in Model)
     {
-        <tr><th scope="row">@account.AccountId</th><td>@account.FirstName - @account.LastName</td></tr>
-        foreach (var reading in account.MeterReadings)
+        <tr><th scope="row">@account.AccountId</th><td>@account.FirstName @account.LastName</td><td>@account.MeterReadings</td></tr>
+
+        <div></div>
+        <ul>
+        @foreach (var reading in account.MeterReadings)
         {
-            <tr><td>reading</td></tr>
+            <tr><th scope="row">@reading.AccountId</th><td>@reading.MeterReadingDateTime</td><td>@reading.MeterReadValue</td></tr>
         }
+        </ul>
+
+
     }
+
 </table>

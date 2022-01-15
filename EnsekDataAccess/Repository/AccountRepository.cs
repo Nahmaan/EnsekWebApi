@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using EnsekDataAccess.Interfaces;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 
 namespace EnsekDataAccess.Repository
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         private EnsekEntities _ensekEntities;
 
@@ -22,7 +23,7 @@ namespace EnsekDataAccess.Repository
         public IEnumerable<Account> GetAllAccounts()
         {
             var collection = _ensekEntities.Accounts.ToList();
-            if(collection.Count <= 0)
+            if (collection.Count <= 0)
                 SeedAccounts();
             return collection.AsQueryable().OrderBy(c => c.AccountId);
         }
@@ -30,7 +31,7 @@ namespace EnsekDataAccess.Repository
         /// <summary>
         /// One time call to seed Test Accounts from CSV into SQL Database
         /// </summary>
-        private void SeedAccounts()
+        public void SeedAccounts()
         {
             const string path = @"C:\Users\Nahmaan\source\repos\EnsekWebApi\EnsekWebApi\Test_Accounts.csv";
             var accounts = new List<Account>();
@@ -56,5 +57,5 @@ namespace EnsekDataAccess.Repository
             _ensekEntities.Accounts.AddRange(accounts);
             _ensekEntities.SaveChanges();
         }
-        }
     }
+}

@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAccountRepository.cs" />
+    <Compile Include="Interfaces\IMeterRespository.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>EnsekEntities.tt</DependentUpon>
     </Compile>

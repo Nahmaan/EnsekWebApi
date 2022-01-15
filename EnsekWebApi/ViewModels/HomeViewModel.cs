@@ -5,8 +5,8 @@ using System.Web;
 
 namespace EnsekWebApi.ViewModels
 {
-    public class AccountViewModel
+    public class HomeViewModel
     {
-
+        public string Result { get; set; }
     }
 }

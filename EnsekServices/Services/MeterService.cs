@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using EnsekDataAccess.Models;
 using EnsekDataAccess.Repository;
+using EnsekServices.Interfaces;
 
 namespace EnsekServices.Services
 {
-    public class MeterService
+    public class MeterService : IMeterService
     {
         private readonly MeterRepository _meterRepository;
 
