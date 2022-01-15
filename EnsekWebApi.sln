@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsekWebApi", "EnsekWebApi\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsekDataAccess", "EnsekDataAccess\EnsekDataAccess.csproj", "{8644303D-B46C-4809-8D4C-4EA1DA1B8C2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsekServices", "EnsekServices\EnsekServices.csproj", "{0DFA6568-56FE-4A31-81A6-C696C43953D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8644303D-B46C-4809-8D4C-4EA1DA1B8C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8644303D-B46C-4809-8D4C-4EA1DA1B8C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8644303D-B46C-4809-8D4C-4EA1DA1B8C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DFA6568-56FE-4A31-81A6-C696C43953D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DFA6568-56FE-4A31-81A6-C696C43953D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DFA6568-56FE-4A31-81A6-C696C43953D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DFA6568-56FE-4A31-81A6-C696C43953D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
