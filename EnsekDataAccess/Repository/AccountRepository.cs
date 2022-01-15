@@ -23,13 +23,16 @@ namespace EnsekDataAccess.Repository
         {
             var collection = _ensekEntities.Accounts.ToList();
             if(collection.Count <= 0)
-                AddAccounts();
+                SeedAccounts();
             return collection.AsQueryable().OrderBy(c => c.AccountId);
         }
 
-        public void AddAccounts()
+        /// <summary>
+        /// One time call to seed Test Accounts from CSV into SQL Database
+        /// </summary>
+        private void SeedAccounts()
         {
-            var path = @"C:\Users\Nahmaan\source\repos\EnsekWebApi\EnsekWebApi\Test_Accounts.csv";
+            const string path = @"C:\Users\Nahmaan\source\repos\EnsekWebApi\EnsekWebApi\Test_Accounts.csv";
             var accounts = new List<Account>();
             using (var sr = new StreamReader(path))
             {
@@ -48,11 +51,10 @@ namespace EnsekDataAccess.Repository
                 }
             }
 
-            if (accounts.Count > 0)
-            {
-                _ensekEntities.Accounts.AddRange(accounts);
-                _ensekEntities.SaveChanges();
-            }
+
+            if (accounts.Count <= 0) return;
+            _ensekEntities.Accounts.AddRange(accounts);
+            _ensekEntities.SaveChanges();
         }
         }
     }

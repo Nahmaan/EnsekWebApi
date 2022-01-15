@@ -17,7 +17,7 @@ namespace EnsekServices.Services
             _accountRepository = accountRepository ?? new AccountRepository();
         }
 
-        public IEnumerable<Account> GetAllManufacturers()
+        public IEnumerable<Account> GetAllAccounts()
         {
             return _accountRepository.GetAllAccounts().OrderBy(x => x.AccountId);
         }

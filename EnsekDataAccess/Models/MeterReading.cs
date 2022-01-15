@@ -15,7 +15,7 @@ namespace EnsekDataAccess.Models
     public partial class MeterReading
     {
         public int MeterReadingId { get; set; }
-        public int AccountId { get; set; }
+        public Nullable<int> AccountId { get; set; }
         public Nullable<System.DateTime> MeterReadingDateTime { get; set; }
         public Nullable<int> MeterReadValue { get; set; }
     

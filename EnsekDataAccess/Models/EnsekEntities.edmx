@@ -17,13 +17,13 @@
           <Key>
             <PropertyRef Name="MeterReadingId" />
           </Key>
-          <Property Name="MeterReadingId" Type="int" Nullable="false" />
-          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="MeterReadingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" />
           <Property Name="MeterReadingDateTime" Type="datetime" />
           <Property Name="MeterReadValue" Type="int" />
         </EntityType>
-        <Association Name="FK__MeterRead__Accou__286302EC">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+        <Association Name="FK__MeterRead__Accou__37A5467C">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="MeterReading" Type="Self.MeterReading" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
@@ -37,7 +37,7 @@
         <EntityContainer Name="EnsekModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MeterReading" EntityType="Self.MeterReading" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__MeterRead__Accou__286302EC" Association="Self.FK__MeterRead__Accou__286302EC">
+          <AssociationSet Name="FK__MeterRead__Accou__37A5467C" Association="Self.FK__MeterRead__Accou__37A5467C">
             <End Role="Account" EntitySet="Account" />
             <End Role="MeterReading" EntitySet="MeterReading" />
           </AssociationSet>
@@ -54,20 +54,20 @@
           <Property Name="AccountId" Type="Int32" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MeterReadings" Relationship="Self.FK__MeterRead__Accou__286302EC" FromRole="Account" ToRole="MeterReading" />
+          <NavigationProperty Name="MeterReadings" Relationship="Self.FK__MeterRead__Accou__37A5467C" FromRole="Account" ToRole="MeterReading" />
         </EntityType>
         <EntityType Name="MeterReading">
           <Key>
             <PropertyRef Name="MeterReadingId" />
           </Key>
-          <Property Name="MeterReadingId" Type="Int32" Nullable="false" />
-          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="MeterReadingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" />
           <Property Name="MeterReadingDateTime" Type="DateTime" Precision="3" />
           <Property Name="MeterReadValue" Type="Int32" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__MeterRead__Accou__286302EC" FromRole="MeterReading" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__MeterRead__Accou__37A5467C" FromRole="MeterReading" ToRole="Account" />
         </EntityType>
-        <Association Name="FK__MeterRead__Accou__286302EC">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+        <Association Name="FK__MeterRead__Accou__37A5467C">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="MeterReading" Type="Self.MeterReading" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
@@ -81,7 +81,7 @@
         <EntityContainer Name="EnsekEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="MeterReadings" EntityType="Self.MeterReading" />
-          <AssociationSet Name="FK__MeterRead__Accou__286302EC" Association="Self.FK__MeterRead__Accou__286302EC">
+          <AssociationSet Name="FK__MeterRead__Accou__37A5467C" Association="Self.FK__MeterRead__Accou__37A5467C">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="MeterReading" EntitySet="MeterReadings" />
           </AssociationSet>
