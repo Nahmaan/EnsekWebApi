@@ -45,39 +45,40 @@ namespace EnsekDataAccess.Repository
                         continue;
                     }
 
-                    var accountId = Convert.ToInt32(row[0]);
-                    var meterReadings = _ensekEntities.MeterReadings.ToList().Where(x => x.AccountId == accountId);
-                    var account = _ensekEntities.Accounts.FirstOrDefault(x => x.AccountId == accountId);
-                    if (account == null)
+                    if (row != null)
                     {
-                        failures++;
-                        continue;
+                        var accountId = Convert.ToInt32(row[0]);
+                        var meterReadings = _ensekEntities.MeterReadings.ToList().Where(x => x.AccountId == accountId);
+                        var account = _ensekEntities.Accounts.FirstOrDefault(x => x.AccountId == accountId);
+                        if (account == null)
+                        {
+                            failures++;
+                            continue;
+                        }
+
+                        var meterReading = new MeterReading
+                        {
+                            Account = account,
+                            MeterReadingDateTime = DateTime.Parse(row?[1]),
+                            MeterReadValue = Convert.ToInt32(row?[2])
+                        };
+
+                        var duplicate = meterReadings.Where(x => x.Account == meterReading.Account && x.MeterReadingDateTime == meterReading.MeterReadingDateTime && x.MeterReadValue == meterReading.MeterReadValue);
+                        if (duplicate.Any())
+                        {
+                            failures++;
+                            continue;
+                        }
+
+                        successful++;
+                        _ensekEntities.MeterReadings.Add(meterReading);
                     }
 
-                    var meterReading = new MeterReading
-                    {
-                        Account = account,
-                        MeterReadingDateTime = DateTime.Parse(row?[1]),
-                        MeterReadValue = Convert.ToInt32(row?[2])
-                    };
-
-                    var duplicate = meterReadings.Where(x => x.Account == meterReading.Account && x.MeterReadingDateTime == meterReading.MeterReadingDateTime && x.MeterReadValue == meterReading.MeterReadValue);
-                    if (duplicate.Any())
-                    {
-                        failures++;
-                        continue;
-                    }
-
-                    successful++;
-                    _ensekEntities.MeterReadings.Add(meterReading);
                     _ensekEntities.SaveChanges();
                 }
             }
 
-            if (successful == 0)
-                return "No meter readings added due to duplicate or invalid data";
-
-            return $@"Successful meter readings: {successful}. Failed meter readings: {failures}";
+            return successful == 0 ? "No meter readings added due to duplicate or invalid data" : $@"Successful meter readings: {successful}. Failed meter readings: {failures}";
         }
 
         private static bool ValidateMeterReadings(string[] row)
